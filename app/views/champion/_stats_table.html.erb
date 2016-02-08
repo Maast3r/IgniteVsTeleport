@@ -1,0 +1,45 @@
+<table id="<%= lane %>" >
+  <caption class="caption"><%= lane %></caption>
+  <thead>
+  <tr>
+    <th>Key Used for Flash</th>
+    <th>Games</th>
+    <th>Wins</th>
+    <th>Losses</th>
+    <th>Win %</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <% gamesd = (data['flash_on_d'].wins + data['flash_on_d'].losses) if data %>
+    <% gamesf = (data['flash_on_f'].wins + data['flash_on_f'].losses) if data %>
+    <% gamesn = (data['no_flash'].wins + data['no_flash'].losses) if data %>
+
+    <% percentd = data ? data['flash_on_d'].wins * 100 / gamesd.to_f : 0.00 %>
+    <% percentf = data ? data['flash_on_f'].wins * 100 / gamesf.to_f : 0.00 %>
+    <% percentn = data ? data['no_flash'].wins * 100 / gamesn.to_f : 0.00 %>
+
+    <% max_percent = data ? [percentd, percentf, percentn].max.round(2) : -1 %>
+
+    <td class="d">Ignite</td>
+    <td class="d dGamesOverall"><%= gamesd || 0 %></td>
+    <td class="d dWinsOverall"><%= data ? data['flash_on_d'].wins : 0 %></td>
+    <td class="d dLossesOverall"><%= data ? data['flash_on_d'].losses : 0 %></td>
+    <td class="d dPercentOverall <%= "winner" if percentd.round(2) == max_percent %>"><%= percentd.round(2) %></td>
+  </tr>
+  <tr>
+    <td class="f">Teleport</td>
+    <td class="f fGamesOverall"><%= gamesf || 0 %></td>
+    <td class="f fWinsOverall"><%= data ? data['flash_on_f'].wins : 0 %></td>
+    <td class="f fLossesOverall"><%= data ? data['flash_on_f'].losses : 0 %></td>
+    <td class="f fPercentOverall <%= "winner" if percentf.round(2) == max_percent %>"><%= percentf.round(2) %></td>
+  </tr>
+  <tr>
+    <td class="n">Neither</td>
+    <td class="n nGamesOverall"><%= gamesn || 0 %></td>
+    <td class="n nWinsOverall"><%= data ? data['no_flash'].wins : 0 %></td>
+    <td class="n nLossesOverall"><%= data ? data['no_flash'].losses : 0 %></td>
+    <td class="n nPercentOverall<%= "winner" if percentn.round(2) == max_percent %>"><%= percentn.round(2) %></td>
+  </tr>
+  </tbody>
+</table>

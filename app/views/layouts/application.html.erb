@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7 ]> <html class="ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8" lang="en"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9" lang="en"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+  	<meta charset="utf-8" />
+
+  	<!-- Uncomment to make IE8 render like IE7 -->
+  	<!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
+
+  	<!-- Set the viewport width to device width for mobile -->
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  	<title><%= content_for?(:title) ? yield(:title) : "Ignite Versus Teleport" %></title>
+
+  	<%= stylesheet_link_tag    "application" %>
+  	<%= javascript_include_tag "vendor/modernizr" %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+    <nav id="nav" class="top-bar" data-topbar role="navigation">
+      <ul class="title-area">
+        <li class="name">
+          <h1><%= link_to "Ignite Versus Teleport", champion_index_path %></h1>
+        </li>
+      </ul>
+
+      <section class="top-bar-section">
+        <!-- Right Nav Section -->
+        <ul class="right">
+          <!-- <li class="has-dropdown">
+            <a href="#">Philip Ross</a>
+            <ul class="dropdown">
+              <li><a href="https://www.linkedin.com/pub/philip-ross/a5/569/575">Philip's LinkedIn</a></li>
+              <li><a href="https://github.com/baseballlover723">Philip's GitHub</a></li>
+            </ul>
+          </li> -->
+          <li class="has-dropdown">
+            <a href="#">Andrew Ma</a>
+            <ul class="dropdown">
+              <li><a href="https://www.linkedin.com/in/softwarelover">Andrew's LinkedIn</a></li>
+              <li><a href="https://github.com/Maast3r">Andrew's GitHub</a></li>
+              <li><a href="http://www.rose-hulman.edu/~maas/">Andrew's Website</a></li>
+            </ul>
+          </li>
+        </ul>
+
+        <!-- Left Nav Section -->
+        <ul class="left">
+           <li><%= link_to "Champions List", champion_index_path %></li>
+          <li><a href="#"><%= link_to "Overall Results", overall_path %></a></li>
+        </ul>
+      </section>
+    </nav>
+
+    <div id="wrapper">
+      <%= yield %>
+      <div class="push"></div>
+    </div>
+
+    <br /><br />
+    <div id="footer">
+      <div id="foot" class="row">
+        <span class="small-9 small-centered columns">If you find any bugs with Ignite Versus Teleport, please email them to maastergotmail@gmail.com. Ignite Versus Teleport is not endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.</span>
+      </div>
+    </div>
+
+    <%= javascript_include_tag "application" %>
+  </body>
+</html>

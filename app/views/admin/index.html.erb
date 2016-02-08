@@ -1,0 +1,17 @@
+<h1>Admin#index</h1>
+<p>Find me in app/views/admin/index.html.erb</p>
+
+<%= form_tag do %>
+  <%= submit_tag("#{@start_stop_string} Polling") %>
+<% end %>
+<h2>index = <%= @index %></h2>
+<h2>db is clean: <%= @is_db_clean %></h2>
+<%= form_tag(reset_index_path, method: "put") do %>
+    <%= submit_tag "set index to 0" %>
+<% end %>
+<h2>Reading from <%= @file_path %></h2>
+<%= form_tag(change_region_path, method: "delete") do %>
+    <%= label_tag(:region, "set new region: ") %>
+    <%= text_field_tag(:region) %>
+    <%= submit_tag "change region" %>
+<% end %>

@@ -1,0 +1,57 @@
+<h1>Overall Rift Results</h1>
+
+<br />
+
+<div id="riftWrapper" class="row">
+	<div id=riftInsideWrapper>
+		<%= image_tag("/assets/images/summoners_rift.png", :class=>"rift") %>
+	</div>
+</div>
+
+<br /><br />
+
+
+<%= javascript_tag "var obj = #{@buckets.to_json}" %>
+<%= javascript_tag "var overallData = #{@buckets['overall'].to_json}" %>
+<%= javascript_tag "var topData = #{@buckets['top'].to_json}" %>
+<%= javascript_tag "var midData = #{@buckets['mid'].to_json}" %>
+<%= javascript_tag "var botData = #{@buckets['bot'].to_json}" %>
+<%= javascript_tag "var jungleData = #{@buckets['jungle'].to_json}" %>
+
+<div class='row' id="overallWrapper">
+	<%= render partial: "stats_table", locals: {lane: "overall", data: @buckets["overall"]} %>
+</div>
+<div class='row'>
+  <table style="width: 100%;">
+    <tr>
+      <td>
+        <div class="tableWrapper">
+          <%= render partial: "stats_table", locals: {lane: "top", data: @buckets["top"]} %>
+        </div>
+      </td>
+      <td>
+        <div class="tableWrapper">
+          <%= render partial: "stats_table", locals: {lane: "jungle", data: @buckets["jungle"]} %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="tableWrapper">
+          <%= render partial: "stats_table", locals: {lane: "mid", data: @buckets["mid"]} %>
+        </div>
+      </td>
+      <td>
+        <div class="tableWrapper">
+          <%= render partial: "stats_table", locals: {lane: "bot", data: @buckets["bot"]} %>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<br /> <br/>
+
+<div class="row" style="text-align:center;">
+	<!-- <h1>In conclusion... Doesn't matter! F FOR FLASH and D for Don't Use D For Flash!</h1> -->
+</div>

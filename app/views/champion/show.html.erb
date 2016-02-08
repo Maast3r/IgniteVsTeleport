@@ -1,0 +1,109 @@
+<h1 id="championShowName"><%= @champion.name + " " + @champion.title %></h1>
+
+<br />
+
+<div class="row">
+  <%= image_tag(@splash_path + @champion.splash_img, {:class => "splash"}) %>
+</div>
+
+<br /><br />
+
+<div class="row" style="text-align:center;">
+  <h3>Click on a rank to see detailed information!</h3>
+</div>
+
+<br />
+
+<div class="row" id="checkDiv">
+  <span class="check">
+    <input type="checkbox" name="rank" value="unranked" onchange="getCheckedCheckboxesFor('callback');">
+    <label for="rank">Unranked</label>
+  </span>
+  <span class="check">
+    <input type="checkbox" name="rank" value="bronze" onchange="getCheckedCheckboxesFor('callback');">
+    <label for="rank">Bronze</label>
+  </span>
+  <span class="check">
+    <input type="checkbox" name="rank" value="silver" onchange="getCheckedCheckboxesFor('callback');">
+    <label for="rank">Silver</label>
+  </span>
+  <span class="check">
+    <input type="checkbox" name="rank" value="gold" onchange="getCheckedCheckboxesFor('callback');">
+    <label for="rank">Gold</label>
+  </span>
+  <span class="check">
+    <input type="checkbox" name="rank" value="platinum" onchange="getCheckedCheckboxesFor('callback');">
+    <label for="rank">Platinum</label>
+  </span>
+  <span class="check">
+    <input type="checkbox" name="rank" value="diamond" onchange="getCheckedCheckboxesFor('callback');">
+    <label for="rank">Diamond</label>
+  </span>
+  <span class="check">
+    <input type="checkbox" name="rank" value="master" onchange="getCheckedCheckboxesFor('callback');">
+    <label for="rank">Master</label>
+  </span>
+  <span class="check">
+    <input type="checkbox" name="rank" value="challenger" onchange="getCheckedCheckboxesFor('callback');">
+    <label for="rank">Challenger</label>
+  </span>
+  <span class="check">
+    <input id="allRanksCheckbox" type="checkbox" name="all" value="all" onchange="checkedAll();">
+    <label for="all">All Ranks</label>
+  </span>
+</div>
+
+<br /><br />
+ <%= javascript_tag "var obj = #{@buckets.to_json}" %>
+ <%= javascript_tag "var overallData = #{@buckets['overall'].to_json}" %>
+ <%= javascript_tag "var topData = #{@buckets['top'].to_json}" %>
+ <%= javascript_tag "var midData = #{@buckets['mid'].to_json}" %>
+ <%= javascript_tag "var botData = #{@buckets['bot'].to_json}" %>
+ <%= javascript_tag "var jungleData = #{@buckets['jungle'].to_json}" %>
+
+<div class='row' id="overallWrapper">
+  <div class="chartWrapper" style="display: inline-block">
+    <h3>Wins by Lane</h3>
+    <div id="chart1Holder">
+      <canvas id="chart"></canvas>
+      <h4 class="disposable">No Data</h4>
+    </div>
+  </div>
+  <%= render partial: "stats_table", locals: {lane: "overall", data: nil} %>
+  <div class="chartWrapper" style="display: inline-block">
+    <h3>Losses by Lane</h3>
+    <div id="chart2Holder">
+      <canvas id="chart2"></canvas>
+      <h4 class="disposable">No Data</h4>
+    </div>
+  </div>
+</div>
+
+<div class='row'>
+  <table style="width: 100%;">
+    <tr>
+      <td>
+        <div class="tableWrapper">
+          <%= render partial: "stats_table", locals: {lane: "top", data: nil} %>
+        </div>
+      </td>
+      <td>
+        <div class="tableWrapper">
+          <%= render partial: "stats_table", locals: {lane: "jungle", data: nil} %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="tableWrapper">
+          <%= render partial: "stats_table", locals: {lane: "mid", data: nil} %>
+        </div>
+      </td>
+      <td>
+        <div class="tableWrapper">
+          <%= render partial: "stats_table", locals: {lane: "bot", data: nil} %>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>

@@ -1,0 +1,33 @@
+<div id="jumbo">
+	<div id="picture">
+		<br /><br />
+		<h1>Ignite Versus Teleport</h1>
+	</div>
+</div>
+
+<br /> <br />
+
+<div class="row">
+	<div class="small-9 small-centered columns">This website is designed to show you which player is superior: The summoner who uses ignite or the summoner who uses teleport. The data for our MySQL database came from Riot Match History's API. If you don't care about individual champion performance and desperately want to know if Ignite or Teleport is superior, <%= link_to "CLICK HERE!", overall_path, class: "overallLink" %></div>
+</div>
+
+<br /> <br/>
+
+<!-- add all the champions with their pictures -->
+<div id="champsDiv" class="row">
+	<h3 id="champsTitle">Click on a champion to find out their summoner stats!</h3>
+	<div id="champs">
+		<% @champions.each do |champion| %>
+		<span class="champ">
+			<%= link_to(image_tag(@riot_path + champion.img), champion_show_path(champion)) %>
+			<%= link_to champion.name, champion_show_path(champion), { :class=>"champName" }  %>
+		</span>
+		<% end %>
+	</div>
+</div>
+
+<br /><br />
+
+<div id="weatherWrapper" class="row">
+	<!-- <div id="weatherArea"><h3>Should You Play League With This Weather?</h3></div> -->
+</div>

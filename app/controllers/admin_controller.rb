@@ -12,9 +12,9 @@ class AdminController < ApplicationController
   @@request_path = "/api/lol/"
   @@request_path_2 = "/v2.2/match/"
   @@region_dataset = "na"
-  @@startID = 2065066096
+  @@startID = 2090426760
   @@match_ids = false
-  @@base = 2063066096
+  @@base = 2090426760
   @@index = false
 
   def index

@@ -5,7 +5,7 @@ RANKS = %w(unranked bronze silver gold platinum diamond master challenger)
 
 class ChampionController < ApplicationController
   def show
-    @riot_path = "https://ddragon.leagueoflegends.com/cdn/6.1.1/img/champion/"
+    @riot_path = "https://ddragon.leagueoflegends.com/cdn/6.2.1/img/champion/"
     @splash_path = "https://ddragon.leagueoflegends.com/cdn/img/champion/"
     @champion = Champion.find(params.require(:id))
 
@@ -30,7 +30,7 @@ class ChampionController < ApplicationController
   end
 
   def index
-    @riot_path = "https://ddragon.leagueoflegends.com/cdn/6.1.1/img/champion/"
+    @riot_path = "https://ddragon.leagueoflegends.com/cdn/6.2.1/img/champion/"
     @champions = Champion.all.sort_by { |champion| champion.name }
   end
 

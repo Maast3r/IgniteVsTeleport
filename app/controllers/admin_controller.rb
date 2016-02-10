@@ -66,7 +66,6 @@ class AdminController < ApplicationController
       puts "polling"
       count = 0
       while true do
-        puts "polling2"
         if !@@polling
           return exit_polling
         end
@@ -89,13 +88,10 @@ class AdminController < ApplicationController
           response = HTTParty.get(match_uri, verify: false)
           if response.code == 200
             handle_response response.parsed_response
-            puts "handled"
-            #write_match_index @@index
-            puts "wrote index"
             increment_index
             count += 1
             if count > MATCH_COUNT_LIMIT
-              puts "stopping polling to avoid database querying limits"
+              puts "--------------------stopping polling to avoid database querying limits"
               return exit_polling
             end
           elsif response.code == 404
@@ -109,12 +105,6 @@ class AdminController < ApplicationController
         sleep KEY_SLEEP
       end
       exit_polling
-    # rescue Exception => e
-    #   puts "error in async poll"
-    #   puts e.message
-    #   puts e.backtrace.inspect
-    #   exit_polling
-    # end
   end
 
   def handle_response(response)
@@ -131,11 +121,8 @@ class AdminController < ApplicationController
       #ignite on 14, teleport on 12
       ign = participant["spell1Id"] == 14 || participant["spell2Id"] == 14
       tele = participant["spell1Id"] == 12 || participant["spell2Id"] == 12
-      flash_on_d = participant["spell1Id"] == 4
-      flash_on_f = participant["spell2Id"] == 4
 
       has_one = ign || tele
-      has_flash = flash_on_d || flash_on_f
 
       rank = Rank.where(champion_id: champion_id, lane: lane, rank: rank, has_one: has_one, tele: tele)
       if won
@@ -158,8 +145,6 @@ class AdminController < ApplicationController
   end
 
   def get_next_match_id
-    puts "test"
-    # @@index = @@startID || get_last_match_id_index
     if !@@index
       @@index = get_last_match_id_index
     end
@@ -167,8 +152,7 @@ class AdminController < ApplicationController
   end
 
   def increment_index
-    puts "incrementing index"
-    @@index = @@index - 1
+    @@index = @@index + 1
   end
 
   def write_match_index(match_index)
@@ -179,7 +163,7 @@ class AdminController < ApplicationController
 
   def get_last_match_id_index
     db_object = LastMatchIndex.first
-    db_object.index = db_object.index - 1
+    db_object.index = db_object.index + 1
     db_object.save!
     return db_object.index
   end

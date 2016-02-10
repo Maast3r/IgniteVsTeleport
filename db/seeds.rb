@@ -39,7 +39,7 @@ champions.each_with_index do |champion_response, index|
 
   create_ranks Champion.create(id: id, name: name, title: title, img: img,
                                splash_img: splash_img, loading_img: loading_img)
-  puts "done with champion ##{index+1} of #{champions.length}"
+  puts "done with champion ##{index+1} of #{champions.length}, #{Rank.all.count}"
   puts name
 end
 

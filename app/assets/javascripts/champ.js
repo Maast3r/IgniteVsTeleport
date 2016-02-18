@@ -163,6 +163,14 @@ function checkedAll(callback){
 
 function populateTables(ranks, callback){
   resetColors();
+  console.log("populate");
+  if(document.getElementById("totalGames")){
+    console.log("here");
+    var totalGames = document.getElementById("totalGames");
+    var total = releventOverallData.games;
+    totalGames.innerHTML = "Total Games: " + total/10
+      + "<br/>Total Players: " + total;
+  }
 
   var zero = 0;
   //overall

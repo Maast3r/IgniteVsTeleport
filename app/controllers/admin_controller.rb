@@ -1,8 +1,8 @@
 require 'csv'
 require 'concurrent'
 
-KEY_SLEEP = 2
-MATCH_COUNT_LIMIT = 2000
+KEY_SLEEP = 0
+MATCH_COUNT_LIMIT = 3500
 
 class AdminController < ApplicationController
   http_basic_authenticate_with name: ENV["ADMIN_USERNAME"], password: ENV["ADMIN_PASSWORD"]
@@ -63,14 +63,12 @@ class AdminController < ApplicationController
 
   def poll
     # begin
-      puts "polling"
       count = 0
       while true do
         if !@@polling
           return exit_polling
         end
         keys.each do |key|
-          puts "loop through keys"
           if !@@polling
             return exit_polling
           end

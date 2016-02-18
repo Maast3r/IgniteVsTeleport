@@ -18,6 +18,8 @@
 <%= javascript_tag "var botData = #{@buckets['bot'].to_json}" %>
 <%= javascript_tag "var jungleData = #{@buckets['jungle'].to_json}" %>
 
+<div id="totalGames"></div>
+
 <div class='row' id="overallWrapper">
 	<%= render partial: "stats_table", locals: {lane: "overall", data: @buckets["overall"]} %>
 </div>

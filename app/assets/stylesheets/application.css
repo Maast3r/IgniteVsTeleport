@@ -298,6 +298,12 @@ td {
     vertical-align: middle;
 }
 
+#totalGames{
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+
 .overallDescription {
     text-align: center;
     width: 70%;

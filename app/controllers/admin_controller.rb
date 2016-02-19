@@ -47,10 +47,10 @@ class AdminController < ApplicationController
     puts "already polling" and return if @@polling
     @@polling = true
     puts "starting polling"
-    poll
+    # poll
     index
     render action: 'index'
-    # Concurrent::Future.execute { poll }
+    Concurrent::Future.execute { poll }
   end
 
   def stop_polling
